@@ -1,27 +1,55 @@
 from defs import *
 
-menu = Menu()
+api_url = "https://jsonplaceholder.typicode.com/users/"
+api_url2 = "https://jsonplaceholder.typicode.com/todos/"
+
+teste = API
+
+teste.Menu
 number = int(input())
 
 
 if number == 1:
-    ListarU()
+    teste.ListarU()
 elif number == 2:
-    BuscarU()
+    id = input("Digite o id do usuário: ")
+
+    teste.BuscarU()
 elif number == 3:
-    InserirU()
+    name = input("Digite o nome do usuário: ")
+    username = input("Digite o username do usuário: ")
+    email = input("Digite o email do usuário: ")
+
+    teste.InserirU()
 elif number == 4:
-    AlterarU()
+    id = input("Digite o id do usuário: ")
+    name = input("Digite o nome do usuário: ")
+    username = input("Digite o username do usuário: ")
+    email = input("Digite o email do usuário: ")
+
+    teste.AlterarU()
 elif number == 5:
-    DeletarU()
+    id = input("Digite o id do usuário: ")
+
+    teste.DeletarU()
 elif number == 6:
-    Menu2()
+    teste.Menu2()
+
     number2 = int(input())
     if number2 == 1:
-        Buscar_T()
+        todoid = input("Digite o id da tarefa: ")
+
+        teste.Buscar_T()
     elif number2 == 2:
-        Inserir_T()
+        titulo = input("Digite o título da tarefa: ")
+
+        teste.Inserir_T()
     elif number2 == 3:
-        Alterar_T()
+        todoid = input("Digite o id da tarefa: ")
+        titulo = input("Digite o título da tarefa: ")
+
+        teste.Alterar_T()
     elif number2 == 4:
-        Deletar_T()
+        todoid = input("Digite o id da tarefa: ")
+
+        teste.Deletar_T()

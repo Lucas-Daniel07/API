@@ -1,77 +1,68 @@
 import requests
 
-api_url = "https://jsonplaceholder.typicode.com/users/"
-api_url2 = "https://jsonplaceholder.typicode.com/todos/"
+class API:
 
-def Menu():
-    print("1 - Listar usuários")
-    print("2 - Buscar usuário")
-    print("3 - Inserir usuário")
-    print("4 - Alterar usuário")
-    print("5 - Deletar usuário")
-    print("6 - Gerenciar tarefas do usuário")
-    print("Digite a opção que deseja efetuar: ")
-    return 0
+    def __init__(self, api_url, api_url2, id, name, username, email, todoid, titulo, response = ''):
+        self.response = response
+        self. api_url = api_url
+        self.api_url2 = api_url2
+        self.id = id
+        self.name = name
+        self.username = username
+        self.email = email
+        self.todoid = todoid
+        self.titulo = titulo
 
-def ListarU():
-    response = requests.get(api_url)
-    return print(response.json())
+    def Menu():
+        print("1 - Listar usuários")
+        print("2 - Buscar usuário")
+        print("3 - Inserir usuário")
+        print("4 - Alterar usuário")
+        print("5 - Deletar usuário")
+        print("6 - Gerenciar tarefas do usuário")
+        print("Digite a opção que deseja efetuar: ")
 
-def BuscarU():
-    id = input("Digite o id do usuário: ")
-    response = requests.get(api_url + id)
-    return print(response.json())
+    def ListarU(self):
+        self.response = requests.get(self.api_url)
+        return print(self.response.json())
 
-def InserirU():
-    name = input("Digite o nome do usuário: ")
-    username = input("Digite o username do usuário: ")
-    email = input("Digite o email do usuário: ")
+    def BuscarU(self):
+        self.response = requests.get(self.api_url + self.id)
+        return print(self.response.json())
 
-    response = requests.post(api_url, data = {"name": name, "username": username, "email": email})
-    return print(response.json())
+    def InserirU(self):
+        self.response = requests.post(self.api_url, data = {"name": self.name, "username": self.username, "email": self.email})
+        return print(self.response.json())
 
-def AlterarU():
-    id = input("Digite o id do usuário que deseja alterar: ")
-    name = input("Digite o novo nome: ")
-    username = input("Digite o novo nome de usuário: ")
-    email = input("Digite o novo e-mail: ")
+    def AlterarU(self):
+        self.response = requests.put(self.api_url + self.id, data = {"name": self.name, "username": self.username, "email": self.email})
+        return print(self.response.json())
 
-    response = requests.put(api_url + id, data = {"name": name, "username": username, "email": email})
-    return print(response.json())
+    def DeletarU(self):
+        self.response = requests.delete(self.api_url + self.id)
+        return print(self.response.json())
 
-def DeletarU():
-    id = input("Digite o id do usuáro que deseja deletar: ")
+    def Menu2():
+        print("1 - Buscar tarefas do usuário")
+        print("2 - Inserir tarefas do usuário")
+        print("3 - Alterar tarefas do usuário")
+        print("4 - Deletar tarefas usuário")
+        print("Digite a opção que deseja efetuar: ")
 
-    response = requests.delete(api_url + id)
-    return print(response.json())
+    def Buscar_T(self):
+        self.response = requests.get(self.api_url2 + self.todoid)
+        return print(self.response.json())
 
-def Menu2():
-    print("1 - Buscar tarefas do usuário")
-    print("2 - Inserir tarefas do usuário")
-    print("3 - Alterar tarefas do usuário")
-    print("4 - Deletar tarefas usuário")
-    print("Digite a opção que deseja efetuar: ")
+    def Inserir_T(self):
+        self.response = requests.post(self.api_url2, data = {"title": self.titulo, "Completed": True})
+        return print(self.response.json())
 
-def Buscar_T():
-    todoid = input("Digite o id da tarefa: ")
-    response = requests.get(api_url2)
-    return print(response.json())
+    def Alterar_T(self):
+        self.response = requests.put(self.api_url2 + self.todoid, data = {"title": self.titulo, "Completed": True})
+        return print(self.response.json())
 
-def Inserir_T():
-    titulo = input("Digite o título da tarefa: ")
+    def Deletar_T(self):
+        todoid = input("Digite o id da tarefa que deseja deletar: ")
 
-    response = requests.post(api_url2, data = {"title": titulo, "Completed": True})
-    return print(response.json())
-
-def Alterar_T():
-    todoid = input("Digite o id da tarefa que deseja alterar: ")
-    titulo = input("Digite o novo título: ")
-
-    response = requests.put(api_url2 + todoid, data = {"title": titulo, "Completed": True})
-    return print(response.json())
-
-def Deletar_T():
-    todoid = input("Digite o id da tarefa que deseja deletar: ")
-
-    response = requests.delete(api_url2 + todoid)
-    return print(response.json())
+        self.response = requests.delete(self.api_url2 + self.todoid)
+        return print(self.response.json())
