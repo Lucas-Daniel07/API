@@ -2,18 +2,11 @@ import requests
 
 class API:
 
-    def __init__(self, api_url, api_url2, id, name, username, email, todoid, titulo, response = ''):
-        self.response = response
+    def __init__(self, api_url, api_url2):
         self. api_url = api_url
         self.api_url2 = api_url2
-        self.id = id
-        self.name = name
-        self.username = username
-        self.email = email
-        self.todoid = todoid
-        self.titulo = titulo
 
-    def Menu():
+    def Menu(self):
         print("1 - Listar usuários")
         print("2 - Buscar usuário")
         print("3 - Inserir usuário")
@@ -23,46 +16,44 @@ class API:
         print("Digite a opção que deseja efetuar: ")
 
     def ListarU(self):
-        self.response = requests.get(self.api_url)
-        return print(self.response.json())
+        response = requests.get(self.api_url)
+        return print(response.json())
 
-    def BuscarU(self):
-        self.response = requests.get(self.api_url + self.id)
-        return print(self.response.json())
+    def BuscarU(self, id):
+        response = requests.get(self.api_url + id)
+        return print(response.json())
 
-    def InserirU(self):
-        self.response = requests.post(self.api_url, data = {"name": self.name, "username": self.username, "email": self.email})
-        return print(self.response.json())
+    def InserirU(self, name, username, email):
+        response = requests.post(self.api_url, data = {"name": name, "username": username, "email": email})
+        return print(response.json())
 
-    def AlterarU(self):
-        self.response = requests.put(self.api_url + self.id, data = {"name": self.name, "username": self.username, "email": self.email})
-        return print(self.response.json())
+    def AlterarU(self, id, name, username, email):
+        response = requests.put(self.api_url + id, data = {"name": name, "username": username, "email": email})
+        return print(response.json())
 
-    def DeletarU(self):
-        self.response = requests.delete(self.api_url + self.id)
-        return print(self.response.json())
+    def DeletarU(self, id):
+        response = requests.delete(self.api_url + id)
+        return print(response.json())
 
-    def Menu2():
+    def Menu2(self):
         print("1 - Buscar tarefas do usuário")
         print("2 - Inserir tarefas do usuário")
         print("3 - Alterar tarefas do usuário")
         print("4 - Deletar tarefas usuário")
         print("Digite a opção que deseja efetuar: ")
 
-    def Buscar_T(self):
-        self.response = requests.get(self.api_url2 + self.todoid)
-        return print(self.response.json())
+    def Buscar_T(self, todoid):
+        response = requests.get(self.api_url2 + todoid)
+        return print(response.json())
 
-    def Inserir_T(self):
-        self.response = requests.post(self.api_url2, data = {"title": self.titulo, "Completed": True})
-        return print(self.response.json())
+    def Inserir_T(self, titulo):
+        response = requests.post(self.api_url2, data = {"title": titulo, "Completed": True})
+        return print(response.json())
 
-    def Alterar_T(self):
-        self.response = requests.put(self.api_url2 + self.todoid, data = {"title": self.titulo, "Completed": True})
-        return print(self.response.json())
+    def Alterar_T(self, todoid, titulo):
+        response = requests.put(self.api_url2 + todoid, data = {"title": titulo, "Completed": True})
+        return print(response.json())
 
-    def Deletar_T(self):
-        todoid = input("Digite o id da tarefa que deseja deletar: ")
-
-        self.response = requests.delete(self.api_url2 + self.todoid)
-        return print(self.response.json())
+    def Deletar_T(self, todoid):
+        response = requests.delete(self.api_url2 + todoid)
+        return print(response.json())
