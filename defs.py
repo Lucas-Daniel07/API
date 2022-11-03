@@ -3,7 +3,7 @@ import requests
 class API:
 
     def __init__(self, api_url, api_url2):
-        self. api_url = api_url
+        self.api_url = api_url
         self.api_url2 = api_url2
 
     def Menu(self):
