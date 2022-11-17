@@ -1,0 +1,12 @@
+<meta charset="UTF-8">
+<html>
+    <head>
+        <title>Meu Site</title>
+    </head>
+    <body>
+        <h1>Bem vindo ao meu site!</h1>
+        {% for user in users %}
+        <p>{{ user["name"] }}</p>
+        {% endfor %}
+    </body>
+</html>
