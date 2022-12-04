@@ -5,6 +5,8 @@ api_url = "https://suap.ifrn.edu.br/api/"
 
 user = input("user: ")
 password = getpass()
+ano = int(input("Digite o ano letivo: "))
+periodo = int(input("Digite o periodo letivo: "))
 
 data = {"username":user,"password":password}
 
@@ -18,7 +20,9 @@ headers = {
 
 print(headers)
 
-response = requests.get(api_url+"v2/minhas-informacoes/meus-dados/", json=data, headers=headers)
+response = requests.get(api_url + f"v2/minhas-informacoes/boletim/{ano}/{periodo}", json = data, headers = headers)
+
+
 
 print(response.text)
 print(response)
