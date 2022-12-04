@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return render_template('index.html', users = user_list)
+    return render_template('templates/index.html', users = user_list)
 
 @app.route("/teste")
 def second_test():
