@@ -1,5 +1,7 @@
 import requests
 from getpass import getpass
+import pandas as pd
+import json
 
 api_url = "https://suap.ifrn.edu.br/api/"
 
@@ -20,9 +22,10 @@ headers = {
 
 print(headers)
 
-response = requests.get(api_url + f"v2/minhas-informacoes/boletim/{ano}/{periodo}", json = data, headers = headers)
+response = requests.get(api_url + f"v2/minhas-informacoes/boletim/{ano}/{periodo}/", json = data, headers = headers)
 
+data = json.loads(response.text)
+boletim = pd.DataFrame(data)
 
-
-print(response.text)
+print(boletim)
 print(response)
