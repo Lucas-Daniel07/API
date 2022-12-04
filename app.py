@@ -1,24 +1,17 @@
-from flask import Flask, render_template, request, flash, url_for
-import users
+from flask import Flask, render_template
+import requests
 
+api_url = "https://jsonplaceholder.typicode.com/users/"
+user_list = requests.get(api_url).json()
 app = Flask(__name__)
 
-user_api = users.Users()
+@app.route("/")
+def hello_world():
+    return render_template('index.html', users = user_list)
 
-@app.route('/')
-def index():
-    return render_template('index.html', users=user_api.list())
+@app.route("/teste")
+def second_test():
+    return "<p> Outro teste! </p>"
 
-@app.route('/user/<int:user_id>')
-def user(user_id):
-    return render_template('user.html', user_data=user_api.read(user_id))
-
-@app.route('/user/create', methods=['GET','POST'])
-def create():
-    if request.method == 'POST':
-        if not request.form['user_name']:
-            flash('O nome é obrigatório!')
-        else:
-            user_data=user_api.create(request.form)
-            return render_template('user.html', user_data=user_data)
-    return render_template('create.html')
+if __name__ == "__main__":
+    app.run()
