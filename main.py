@@ -37,10 +37,10 @@ def users():
         name = request.form.get('name')
         username = request.form.get('username')
         email = request.form.get('email')
-        id_user_change = request.form.get('id_user_change')
-        user_change = api_url + "users/" + id_user_change
+        id_user_update = request.form.get('id_user_update')
+        user_update = api_url + "users/" + id_user_update
 
-        requests.put(user_change, data={"name": name, "username": username, "email": email})
+        requests.put(user_update, data={"name": name, "username": username, "email": email})
         users = requests.get(api_url + "users").json()
 
         return render_template(template, users=users)
@@ -75,10 +75,10 @@ def todos():
         title = request.form.get("title")
         completed = request.form.get("completed")
         user_id = request.form.get("user_id")
-        id_todo_change = request.form.get('id_todo_change')
-        todo_change = api_url + id_todo_change
+        id_todo_update = request.form.get('id_todo_update')
+        todo_update = api_url + id_todo_update
 
-        requests.put(todo_change, data={"title": title, "userId": user_id, "completed": completed})
+        requests.put(todo_update, data={"title": title, "userId": user_id, "completed": completed})
         todos = requests.get(api_url + "todos").json()
 
         return render_template(template, todos=todos)
